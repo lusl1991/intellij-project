@@ -6,6 +6,7 @@
 </head>
 <body>
 <h2>Hello World!</h2>
+<a href="/downloadApi/downloadtemplate.do">下载文件</a>
 <div>
     <h2>用异步请求获取学生信息</h2><br>
     请输入学生学号，如果是0则查询所有学生信息
@@ -15,7 +16,6 @@
 <script type="application/javascript">
     function findStudentInfo() {
         var studentid=$("#studentid").val();
-//        alert("获取到的studentid：" + studentid);
         $.ajax({
             type:"POST",
             url:"/studentApi/findAllStudentInfo.do",
