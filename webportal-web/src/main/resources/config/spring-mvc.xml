@@ -58,4 +58,6 @@
         <property name="maxUploadSize" value="5242880"/>
     </bean>
 
+    <import resource="websocket.xml"></import>
+
 </beans>
