@@ -11,6 +11,8 @@ import org.apache.poi.ss.usermodel.Cell;
 import java.awt.*;
 import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -19,11 +21,11 @@ public class ExcelUtil {
     /**
      * 下载excel文件模板
      * @param columnNames
-     * @param lst
+     * @param list
      * @return
      * @throws UnsupportedEncodingException
      */
-    public static byte[] ExportTemplate(String columnNames[], List<Object> list) throws UnsupportedEncodingException {
+    public static byte[] ExportTemplate(List<Field> columnNames, List<Method> columnMethods, List<Object> list) throws UnsupportedEncodingException {
         ByteArrayOutputStream os = new ByteArrayOutputStream();
         WritableWorkbook workbook;
         // 设置文件名
@@ -35,7 +37,7 @@ public class ExcelUtil {
             // 设置行宽行高
             CellView cv = new CellView();
             cv.setAutosize(true);
-            for (int i = 0; i < columnNames.length; i++) {
+            for (int i = 0; i < columnNames.size(); i++) {
                 cv.setSize(500);
                 sheet.setColumnView(i, cv);
             }
@@ -59,14 +61,31 @@ public class ExcelUtil {
             // 设置excel边框
             wff_merge.setBorder(jxl.format.Border.ALL, jxl.format.BorderLineStyle.THIN);
             // 第一行，表头
-            for (int i = 0; i < columnNames.length; i++) {
-                Label columnLabel = new Label(i,0,columnNames[i], wff_merge);
+            for (int i = 0; i < columnNames.size(); i++) {
+                Label columnLabel = new Label(i,0,columnNames.get(i).getName(), wff_merge);
                 sheet.addCell(columnLabel);
             }
 
+            //设置excel数据区边框
+            WritableCellFormat data_merge = new WritableCellFormat();
+            data_merge.setBorder(jxl.format.Border.ALL, jxl.format.BorderLineStyle.THIN);
+            //设置数据区左右居中
+            data_merge.setAlignment(Alignment.CENTRE);
+            //设置数据区背景色
+            data_merge.setBackground(Colour.WHITE);
+
             //填充数据
             if(list!=null){
-
+                for(int row = 0; row < list.size(); row++){
+                    sheet.setRowView(row+1, 400);
+                    Object rowobj = list.get(row);
+                    for(int col = 0; col < columnNames.size(); col++){
+                        Method method = columnMethods.get(col);
+                        Object colobj = method.invoke(rowobj);
+                        Label dataLabel = new Label(col, row+1, colobj.toString(),data_merge);
+                        sheet.addCell(dataLabel);
+                    }
+                }
             }
             workbook.write();
             workbook.close();
