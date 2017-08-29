@@ -32,6 +32,8 @@ var IWebSocket = function(json) {
         websocket = new SockJS("http://" + options.host + options.sockJsUri + options.uid);
     }
 
+    console.log(websocket);
+
     websocket.onopen = function(evnt) {
 
         options.onOpen(evnt);

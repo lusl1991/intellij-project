@@ -95,6 +95,13 @@
             <version>${spring.version}</version>
         </dependency>
 
+        <!--websocket-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-websocket</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
         <!-- mybatis包 -->
         <dependency>
             <groupId>org.mybatis</groupId>
@@ -239,13 +246,6 @@
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
             <version>3.9</version>
-        </dependency>
-
-        <!--websocket-->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-websocket</artifactId>
-            <version>4.3.9.RELEASE</version>
         </dependency>
 
         <!--gson-->
