@@ -91,6 +91,7 @@ public class MyWebSocketHandler implements WebSocketHandler {
 	public void sendMessageToUser(Long qyid, Message msg)throws IOException {
 		WebSocketSession session = userSocketSessionMap.get(qyid);
 		Thread thread = new Thread();
+		msg = msg==null?new Message():msg;
 		for(long i=0;i<500;i++){
 			if (session != null && session.isOpen()) {
 				msg.setSuccess(i+1);

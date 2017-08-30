@@ -38,7 +38,7 @@
     <filter-class>com.softel.filter.CorsFilter</filter-class>
     <init-param>
       <param-name>Access-Control-Allow-Origin</param-name>
-      <param-value>http://localhost:4200,http://localhost:18080
+      <param-value>http://localhost:4200,http://localhost:18080,ws://localhost:18080
       </param-value>
     </init-param>
     <init-param>
@@ -77,13 +77,13 @@
     <init-param>
       <param-name>contextConfigLocation</param-name>
       <param-value>
-        classpath:config/spring-mvc.xml
+        classpath:config/spring-mvc.xml,classpath:config/websocket.xml
       </param-value>
     </init-param>
     <load-on-startup>2</load-on-startup>
   </servlet>
   <servlet-mapping>
     <servlet-name>spring</servlet-name>
-    <url-pattern>*.do</url-pattern>
+    <url-pattern>/</url-pattern>
   </servlet-mapping>
 </web-app>

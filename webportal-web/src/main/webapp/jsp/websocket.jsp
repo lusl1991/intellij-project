@@ -16,16 +16,84 @@
 %>
 <script type="text/javascript" src="../assets/js/jquery-1.7.2.js"></script>
 <script type="text/javascript" src="../assets/websocket/websocket.js"></script>
+<script type="text/javascript" src="../assets/js/echart/build/dist/echarts.js"></script>
 <html>
 <head>
     <title>Title</title>
 </head>
-<body>
+<body onload="initwebsocket()">
     <input type="file" />
     <button onclick="upload()">上传文件</button>
+    <div id="aa" style="width:100%;height:380px;border:1px solid red;margin-top:50px;"></div>
 </body>
 <script>
+    var myChart;
+
+    require.config({
+        paths:{
+            echarts:'<%=path%>/assets/js/echart/build/dist'
+        }
+    });
+
+    require(
+        [
+            'echarts',
+            'echarts/chart/pie'
+        ],DrawEchart
+    )
+
+    function DrawEchart(ec){
+        myChart = ec.init(document.getElementById("aa"));
+    }
+
+    //成功数颜色
+    var labelTop = {
+        normal : {
+            color : '#5cb85c',
+            label : {
+                show : true,
+                position : 'center',
+                formatter : '{b}',
+                textStyle: {
+                    baseline : 'bottom'
+                }
+            },
+            labelLine : {
+                show : false
+            }
+        }
+    };
+
+    //失败数颜色
+    var labelBottom = {
+        normal : {
+            color: '#d9534f',
+            label : {
+                show : true,
+                position : 'center'
+            },
+            labelLine : {
+                show : false
+            }
+        },
+        emphasis: {
+            color: 'rgba(0,0,0,0)'
+        }
+    };
+
     function upload(){
+        $.ajax({
+            type:"POST",
+            url:"/websocket/test",
+            dataType:"json",
+            data:{"qyid":1000},
+            success : function (data) {
+
+            }
+        });
+    }
+
+    function initwebsocket(){
         var qyid = 1000;
         var path = '<%=basePath %>';
         console.log(path);
@@ -43,6 +111,64 @@
             ...
             */
         });
+    }
+
+    function echart(cc){
+        //饼图中间label
+        var labelFromatter = {
+            normal : {
+                label : {
+                    formatter : function(params) {
+                        return (100 - params.percent).toFixed(2) + '%';
+                    },
+                    textStyle : {
+                        baseline : 'top',
+                        fontSize : '18',
+                        fontWeight : 'lighter'
+                    },
+                    show : true
+                },
+                labelLine : {
+                    show : true
+                }
+            },
+        };
+
+        var option = {
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b}: {c} ({d}%)"
+            },
+            series: [
+                {
+                    name:'文件上传',
+                    type:'pie',
+                    radius: ['50%', '70%'],
+                    avoidLabelOverlap: false,
+                    label: {
+                        normal: {
+                            show: false,
+                            position: 'center'
+                        },
+                        emphasis: {
+                            show: true,
+                            textStyle: {
+                                fontSize: '30',
+                                fontWeight: 'bold'
+                            }
+                        }
+                    },
+                    labelLine: {
+                        normal: {
+                            show: false
+                        }
+                    },
+                    data:cc,
+                    itemStyle : labelFromatter
+                }
+            ]
+        };
+        myChart.setOption(option);
     }
 </script>
 </html>

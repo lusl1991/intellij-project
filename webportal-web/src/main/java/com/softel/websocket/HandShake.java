@@ -15,17 +15,17 @@ import org.springframework.web.socket.server.HandshakeInterceptor;
 public class HandShake implements HandshakeInterceptor {
 	public boolean beforeHandshake(ServerHttpRequest request,ServerHttpResponse response, WebSocketHandler wsHandler,
 		Map<String, Object> attributes) throws Exception {
-		System.out.println("Websocket:用户[ID:"+ ((ServletServerHttpRequest) request).getServletRequest()
-		.getSession(false).getAttribute("uid") + "]已经建立连接");
+		System.out.println("Websocket:用户[ID:"+ ((ServletServerHttpRequest) request).getServletRequest().getSession(false).getAttribute("qyid") + "]已经建立连接");
 		if (request instanceof ServletServerHttpRequest) {
 			ServletServerHttpRequest servletRequest = (ServletServerHttpRequest) request;
 			HttpSession session = servletRequest.getServletRequest().getSession(false);
 			// 标记用户
-			Long uid = (Long) session.getAttribute("uid");
-			if (uid != null) {
-				attributes.put("uid", uid);
+			Long qyid = (Long) session.getAttribute("qyid");
+			if (qyid != null) {
+				attributes.put("qyid", qyid);
 			} else {
-				return false;
+				//return false;
+				attributes.put("qyid", 1000l);
 			}
 		}
 		return true;

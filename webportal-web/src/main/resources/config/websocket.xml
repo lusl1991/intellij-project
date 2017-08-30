@@ -11,14 +11,14 @@
     <bean id="websocket" class="com.softel.websocket.MyWebSocketHandler"/>
 
     <websocket:handlers>
-        <websocket:mapping path="/" handler="websocket" />
+        <websocket:mapping path="/ws" handler="websocket" />
         <websocket:handshake-interceptors>
             <bean class="com.softel.websocket.HandShake" />
         </websocket:handshake-interceptors>
     </websocket:handlers>
 
     <websocket:handlers>
-        <websocket:mapping path="/" handler="websocket" />
+        <websocket:mapping path="/ws" handler="websocket" />
         <websocket:handshake-interceptors>
             <bean class="com.softel.websocket.HandShake" />
         </websocket:handshake-interceptors>

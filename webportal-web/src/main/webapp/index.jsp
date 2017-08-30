@@ -18,7 +18,7 @@
         var studentid=$("#studentid").val();
         $.ajax({
             type:"POST",
-            url:"/studentApi/findAllStudentInfo.do",
+            url:"/studentApi/findAllStudentInfo",
             data:{id:studentid},
             dataType:"json",
             success : function (data) {
