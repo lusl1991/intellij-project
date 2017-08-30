@@ -41,17 +41,18 @@ public class DownloadController {
     }
 
     @RequestMapping("downloadtemplate")
-    public ResponseEntity<byte[]> downloadtemplate(){
+    public ResponseEntity<byte[]> downloadtemplate() throws IOException {
         Student student = new Student();
         List<Field> columnNames = InvokeUtil.getFields(student);
         List<Method> columnMethods = InvokeUtil.getMethod(student);
         String fileName = "student.xls";
-
+        String path = this.getClass().getResource("/excelTemple").getPath()+"temple.xls";
         try {
             String daileName = new String(fileName.getBytes("gb2312"), "iso8859-1");
             ResultVo resultVo = studentService.findAllStudent(null);
             List<Object> list = (List<Object>) resultVo.getResult();
-            byte[] bs = ExcelUtil.ExportTemplate(columnNames,columnMethods,list);
+            //byte[] bs = ExcelUtil.ExportTemplate(columnNames,columnMethods,list);
+            byte[] bs = ExcelUtil.WriteHssf(path);
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
             headers.setContentDispositionFormData("attachment", daileName);

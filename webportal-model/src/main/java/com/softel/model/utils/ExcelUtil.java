@@ -7,10 +7,18 @@ import jxl.format.Colour;
 import jxl.format.VerticalAlignment;
 import jxl.write.*;
 import jxl.write.Label;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 import java.awt.*;
-import java.io.ByteArrayOutputStream;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.text.DecimalFormat;
@@ -129,5 +137,69 @@ public class ExcelUtil {
                 break;
         }
         return value;
+    }
+
+    /**
+     * excel2003版本，文件格式.xls
+     * @param path
+     * @return
+     * @throws IOException
+     */
+    public static byte[] WriteHssf(String path) throws IOException {
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
+        HSSFWorkbook workbook = new HSSFWorkbook(new FileInputStream( new File(path)));
+        HSSFSheet sheet = workbook.getSheetAt(0);
+        for(int r = 1; r < 50; r++){
+            HSSFRow row = sheet.createRow(r);
+            String name = "name" + "-" + r ;
+            String sex = "sex" + "-" + r ;
+            String phone = "phone" + "-" + r ;
+            String address = "address" + "-" + r ;
+            HSSFCell first = row.createCell(0);
+            first.setCellValue(name);
+
+            HSSFCell second = row.createCell(1);
+            second.setCellValue(sex);
+
+            HSSFCell third = row.createCell(2);
+            third.setCellValue(phone);
+
+            HSSFCell fourth = row.createCell(3);
+            fourth.setCellValue(address);
+        }
+        workbook.write(os);
+        return  os.toByteArray();
+    }
+
+    /**
+     * excel2007及以上版本，格式.xlsx
+     * @param path
+     * @return
+     * @throws IOException
+     */
+    public static byte[] WriteXssf(String path) throws IOException {
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
+        XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream( new File(path)));
+        XSSFSheet sheet = workbook.getSheetAt(0);
+        for(int r = 1; r < 50; r++){
+            XSSFRow row = sheet.createRow(r);
+            String name = "name" + "-" + r ;
+            String sex = "sex" + "-" + r ;
+            String phone = "phone" + "-" + r ;
+            String address = "address" + "-" + r ;
+            XSSFCell first = row.createCell(0);
+            first.setCellValue(name);
+
+            XSSFCell second = row.createCell(1);
+            second.setCellValue(sex);
+
+            XSSFCell third = row.createCell(2);
+            third.setCellValue(phone);
+
+            XSSFCell fourth = row.createCell(3);
+            fourth.setCellValue(address);
+        }
+        workbook.write(os);
+        return  os.toByteArray();
     }
 }
