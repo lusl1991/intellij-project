@@ -1,7 +1,6 @@
 package com.softel.controller;
 
 import com.softel.model.utils.ResultVo;
-import com.softel.websocket.Message;
 import com.softel.websocket.MyWebSocketHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
