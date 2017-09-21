@@ -1,0 +1,11 @@
+[
+  {
+    "code":0,
+    "msg":"success",
+    "details":"success"
+  },{
+    "code":500,
+    "msg":"error",
+    "details":"system error"
+  }
+]
