@@ -1,5 +1,6 @@
 package com.softel.model.utils;
 
+import net.sf.json.JSON;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -38,7 +39,7 @@ public class ParseJson {
     }
 
     public static void main(String[] args){
-        String path = "E:\\package.json";
+        String path = "D:\\FaultCode.json";
         String JsonContext = new ParseJson().ReadFile(path);
         JSONArray jsonArray = JSONArray.fromObject(JsonContext);
         List<FaultCode> list = JSONArray.toList(jsonArray,FaultCode.class);
