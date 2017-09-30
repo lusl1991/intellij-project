@@ -12,6 +12,13 @@ import java.util.List;
 
 public class ParseJson {
 
+    public List<Object> JsonToList(String path, Class<?> clazz){
+        String JsonContext = new ParseJson().ReadFile(path);
+        JSONArray jsonArray = JSONArray.fromObject(JsonContext);
+        List<Object> list = JSONArray.toList(jsonArray,clazz);
+        return list;
+    }
+
     public String ReadFile(String Path){
         BufferedReader reader = null;
         String laststr = "";

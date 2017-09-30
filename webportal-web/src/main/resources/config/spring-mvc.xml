@@ -13,6 +13,8 @@
             http://www.springframework.org/schema/websocket
             http://www.springframework.org/schema/websocket/spring-websocket.xsd">
 
+    <context:property-placeholder location="classpath:config/captcha.properties" />
+
     <!-- 扫描controller（controller层注入） -->
     <context:component-scan base-package="com.softel.controller"/>
 
@@ -58,5 +60,39 @@
         <property name="defaultEncoding" value="UTF-8"/>
         <property name="maxUploadSize" value="5242880"/>
     </bean>
+
+    <!-- Kaptcha验证码生成器 -->
+    <bean name="producer" class="com.google.code.kaptcha.impl.DefaultKaptcha" scope="singleton">
+        <property name="config">
+            <bean class="com.google.code.kaptcha.util.Config">
+                <constructor-arg>
+                    <props>
+                        <prop key="kaptcha.border">${border}</prop>
+                        <prop key="kaptcha.image.width">${width}</prop>
+                        <prop key="kaptcha.textproducer.font.color">${fontcolor}</prop>
+                        <prop key="kaptcha.textproducer.char.string">${charstring}</prop>
+                        <prop key="kaptcha.textproducer.char.length">${charlength}</prop>
+                        <prop key="kaptcha.textproducer.char.space">${charspace}</prop>
+                        <prop key="kaptcha.noise.impl">${noiseimpl}</prop>
+                        <prop key="kaptcha.noise.color">${noisecolor}</prop>
+                        <prop key="kaptcha.obscurificator.impl">${obscurificatorimpl}</prop>
+                    </props>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean>
+
+    <!--返回时间格式类型-->
+    <bean id="objectMapper" class="org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean">
+        <property name="simpleDateFormat" value="yyyy-MM-dd HH:mm:ss"/>
+    </bean>
+
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="objectMapper" ref="objectMapper" />
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
 
 </beans>

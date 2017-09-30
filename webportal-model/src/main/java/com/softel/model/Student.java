@@ -1,5 +1,7 @@
 package com.softel.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 public class Student {
     private Integer id;
 
@@ -7,6 +9,10 @@ public class Student {
 
     private Boolean sex;
 
+    /**
+     * 当为null或者""时，不返回该字段
+     */
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private String address;
 
     public Integer getId() {

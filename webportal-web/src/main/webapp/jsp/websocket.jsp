@@ -14,9 +14,9 @@
             + request.getServerName() + ":" + request.getServerPort()
             + path + "/";
 %>
-<script type="text/javascript" src="../assets/js/jquery-1.7.2.js"></script>
-<script type="text/javascript" src="../assets/websocket/websocket.js"></script>
-<script type="text/javascript" src="../assets/js/echart/build/dist/echarts.js"></script>
+<script type="text/javascript" src="<%=path%>/assets/js/common/jquery/jquery1.8.3.min.js"></script>
+<script type="text/javascript" src="<%=path%>/assets/websocket/websocket.js"></script>
+<script type="text/javascript" src="<%=path%>/assets/js/echart/build/dist/echarts.js"></script>
 <html>
 <head>
     <title>Title</title>

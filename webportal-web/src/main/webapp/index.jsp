@@ -1,8 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://"
+            + request.getServerName() + ":" + request.getServerPort()
+            + path + "/";
+%>
 <html>
 <head>
     <title>开发中......</title>
-    <script type="text/javascript" src="./assets/js/jquery-1.7.2.js"></script>
+    <script type="text/javascript" src="<%=path%>/assets/js/common/jquery/jquery1.8.3.min.js"></script>
 </head>
 <body>
 <h2>Hello World!</h2>

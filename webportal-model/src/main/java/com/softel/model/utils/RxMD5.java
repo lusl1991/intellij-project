@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.security.MessageDigest;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -63,17 +64,7 @@ public class RxMD5 {
 		if (file == null || !file.exists()) {
 			return null;
 		} else {
-			if (file.getName().indexOf(".xls") > -1) {
-				try {
-					String inputStr = ExcelToStr(file);
-					return StringMD5(inputStr);
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-					return null;
-				}
-			} else {
-				return TxtMD5(file);
-			}
+			return TxtMD5(file);
 		}
 	}
 
@@ -131,7 +122,10 @@ public class RxMD5 {
 					Cell cell = row.getCell(columnNum);
 					cell.setCellType(Cell.CELL_TYPE_STRING);
 					String value = cell.getStringCellValue();
-					msg += value + "|";
+					msg += value;
+					if(columnNum < columns){
+						msg += "|";
+					}
 				}
 				if(rowNum < lastRowNum){
 					msg += "\\r\\n";
@@ -158,37 +152,6 @@ public class RxMD5 {
 			e.printStackTrace();
 		}
 		return workbook;
-	}
-
-	/**
-	 * 字符串MD5加密
-	 * @param inputStr
-	 * @return
-	 */
-	private String StringMD5(String inputStr) {
-		MessageDigest md5=null;
-		try {
-			md5 = MessageDigest.getInstance("MD5");
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-		char[] charArray = inputStr.toCharArray(); //将字符串转换为字符数组
-		byte[] byteArray = new byte[charArray.length]; //创建字节数组
-		for (int i = 0; i < charArray.length; i++){
-			byteArray[i] = (byte) charArray[i];
-		}
-		//将得到的字节数组进行MD5运算
-		byte[] md5Bytes = md5.digest(byteArray);
-		StringBuffer md5Str= new StringBuffer();
-		for (int i = 0; i < md5Bytes.length; i++){
-			if (Integer.toHexString(0xFF & md5Bytes[i]).length() == 1){
-				md5Str.append("0").append(Integer.toHexString(0xFF & md5Bytes[i]));
-			} else {
-				md5Str.append(Integer.toHexString(0xFF & md5Bytes[i]));
-			}
-		}
-		return md5Str.toString();
 	}
 
 
