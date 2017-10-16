@@ -72,9 +72,9 @@ import org.springframework.web.servlet.ModelAndView;
       */
      @RequestMapping("/checkCaptchaCode")
      @ResponseBody
-     public ResultVo checkCaptchaCode(HttpServletRequest request, HttpServletResponse response, @RequestParam("captchaCode") String captchaCode){
+     public ResultVo checkCaptchaCode(HttpServletRequest request, HttpServletResponse response, @RequestParam("captcha") String captcha){
          ResultVo resultVo = new ResultVo();
-         System.out.println("页面输入验证码===="+captchaCode);
+         System.out.println("页面输入验证码===="+captcha);
          
          response.setCharacterEncoding("UTF-8");
          response.setHeader("Pragma", "No-cache");
@@ -83,7 +83,7 @@ import org.springframework.web.servlet.ModelAndView;
          
          String generateCode =(String) request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
          String result = "";
-         if(generateCode.equals(captchaCode)){
+         if(generateCode.equals(captcha)){
              resultVo.setSuccess(true);
              resultVo.setMessage("验证成功");
          }else{
