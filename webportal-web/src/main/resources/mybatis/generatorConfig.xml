@@ -23,7 +23,7 @@
                              targetProject="F:\Idea Project\webportal\webportal-dao\src\main\java" type="XMLMAPPER">
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
-        <table tableName="TB_USER" domainObjectName="TbUser"
+        <table tableName="TB_MENU" domainObjectName="TbMenu"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">

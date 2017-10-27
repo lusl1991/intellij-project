@@ -19,7 +19,7 @@ body {
     transform: translateX(-50%) translateY(-50%);
 }
 .captcha {
-    width:160px !important;
+    width:120px !important;
 }
 img {
     cursor: pointer;

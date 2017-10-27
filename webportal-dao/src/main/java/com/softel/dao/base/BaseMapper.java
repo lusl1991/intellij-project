@@ -4,7 +4,11 @@ import java.util.List;
 
 public interface BaseMapper<T> {
     int insert(T var);
-    int deleteByPrimaryKey(T var);
+    int deleteByPrimaryKey(Integer var);
+    int deleteByExample(T var);
+    int updateByPrimaryKey(T var);
     int updateByPrimaryKeySelective(T var);
-    List<T> selectByPrimaryKey(T var);
+    T selectByPrimaryKey(Integer var);
+    T selectByPrimaryKeySelective(T var);
+    List<T> selectByExample(T var);
 }
