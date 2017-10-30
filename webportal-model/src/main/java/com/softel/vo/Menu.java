@@ -12,6 +12,8 @@ public class Menu {
 
     private List<SubMenu> subs;
 
+    private Boolean isleaf;
+
     public Integer getId() {
         return id;
     }
@@ -42,5 +44,13 @@ public class Menu {
 
     public void setSubs(List<SubMenu> subs) {
         this.subs = subs;
+    }
+
+    public Boolean getIsleaf() {
+        return isleaf;
+    }
+
+    public void setIsleaf(Boolean isleaf) {
+        this.isleaf = isleaf;
     }
 }

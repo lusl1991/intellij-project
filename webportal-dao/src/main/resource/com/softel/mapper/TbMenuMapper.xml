@@ -7,11 +7,12 @@
     <result column="TITLE" property="title" jdbcType="VARCHAR" />
     <result column="PATH" property="path" jdbcType="VARCHAR" />
     <result column="LEVEL" property="level" jdbcType="INTEGER" />
+    <result column="ISLEAF" property="isleaf" jdbcType="INTEGER" />
     <result column="PARENTID" property="parentid" jdbcType="INTEGER" />
     <result column="ORDERID" property="orderid" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, ICON, TITLE, PATH, LEVEL, PARENTID, ORDERID
+    ID, ICON, TITLE, PATH, LEVEL, ISLEAF, PARENTID, ORDERID
   </sql>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -43,10 +44,10 @@
 
   <insert id="insert" parameterType="com.softel.model.TbMenu" >
     insert into tb_menu (ID, ICON, TITLE, 
-      PATH, LEVEL, PARENTID,
+      PATH, LEVEL, ISLEAF, PARENTID,
       ORDERID)
     values (#{id,jdbcType=INTEGER}, #{icon,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
-      #{path,jdbcType=VARCHAR}, #{level,jdbcType=INTEGER}, #{parentid,jdbcType=INTEGER}, 
+      #{path,jdbcType=VARCHAR}, #{level,jdbcType=INTEGER}, #{isleaf,jdbcType=INTEGER}, #{parentid,jdbcType=INTEGER},
       #{orderid,jdbcType=INTEGER})
   </insert>
 
@@ -67,6 +68,9 @@
       </if>
       <if test="level != null" >
         LEVEL,
+      </if>
+      <if test="isleaf != null" >
+        ISLEAF,
       </if>
       <if test="parentid != null" >
         PARENTID,
@@ -90,6 +94,9 @@
       </if>
       <if test="level != null" >
         #{level,jdbcType=INTEGER},
+      </if>
+      <if test="isleaf != null" >
+        #{isleaf,jdbcType=INTEGER},
       </if>
       <if test="parentid != null" >
         #{parentid,jdbcType=INTEGER},
@@ -115,6 +122,9 @@
       <if test="level != null" >
         LEVEL = #{level,jdbcType=INTEGER},
       </if>
+      <if test="isleaf != null" >
+        ISLEAF = #{isleaf,jdbcType=INTEGER},
+      </if>
       <if test="parentid != null" >
         PARENTID = #{parentid,jdbcType=INTEGER},
       </if>
@@ -131,6 +141,7 @@
       TITLE = #{title,jdbcType=VARCHAR},
       PATH = #{path,jdbcType=VARCHAR},
       LEVEL = #{level,jdbcType=INTEGER},
+      ISLEAF = #{isleaf,jdbcType=INTEGER},
       PARENTID = #{parentid,jdbcType=INTEGER},
       ORDERID = #{orderid,jdbcType=INTEGER}
     where ID = #{id,jdbcType=INTEGER}

@@ -12,6 +12,8 @@ public class SubMenu {
 
     private List<SubMenu> subs;
 
+    private boolean isleaf;
+
     public String getIcon() {
         return icon;
     }
@@ -42,5 +44,13 @@ public class SubMenu {
 
     public void setSubs(List<SubMenu> subs) {
         this.subs = subs;
+    }
+
+    public boolean isIsleaf() {
+        return isleaf;
+    }
+
+    public void setIsleaf(boolean isleaf) {
+        this.isleaf = isleaf;
     }
 }

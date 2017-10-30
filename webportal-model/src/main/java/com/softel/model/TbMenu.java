@@ -1,6 +1,7 @@
 package com.softel.model;
 
 public class TbMenu {
+
     private Integer id;
 
     private String icon;
@@ -10,6 +11,8 @@ public class TbMenu {
     private String path;
 
     private Integer level;
+
+    private Integer isleaf;
 
     private Integer parentid;
 
@@ -69,5 +72,13 @@ public class TbMenu {
 
     public void setOrderid(Integer orderid) {
         this.orderid = orderid;
+    }
+
+    public Integer getIsleaf() {
+        return isleaf;
+    }
+
+    public void setIsleaf(Integer isleaf) {
+        this.isleaf = isleaf;
     }
 }
