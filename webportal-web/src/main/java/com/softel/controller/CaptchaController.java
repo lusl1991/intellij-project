@@ -8,9 +8,14 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.ws.WebServiceException;
+
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
+import com.softel.exception.BusinessException;
 import com.softel.model.utils.ResultVo;
+import com.softel.service.exception.RootRuntimeException;
+import com.softel.service.exception.ServiceException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,7 +41,7 @@ import org.springframework.web.servlet.ModelAndView;
       * Created        2017年1月17日 下午5:07:28
       */
      @RequestMapping("/getCaptchaCode")
-     public ModelAndView getCaptchaCode(HttpServletRequest request, HttpServletResponse response) throws IOException{
+     public ModelAndView getCaptchaCode(HttpServletRequest request, HttpServletResponse response) throws IOException {
          HttpSession session = request.getSession();
          
          response.setDateHeader("Expires", 0);  
@@ -52,7 +57,7 @@ import org.springframework.web.servlet.ModelAndView;
          //利用生成的字符串构建图片
          BufferedImage bi = captchaProducer.createImage(capText);
          ServletOutputStream out = response.getOutputStream();  
-         ImageIO.write(bi, "jpg", out);  
+         ImageIO.write(bi, "jpg", out);
          
          try {  
              out.flush();  

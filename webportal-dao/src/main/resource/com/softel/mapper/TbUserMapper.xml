@@ -18,11 +18,17 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
 
-  <select id="selectByAccount" resultType="com.softel.model.TbUser" parameterType="java.lang.String">
+  <select id="selectByAccount" resultMap="BaseResultMap" parameterType="java.lang.String">
     select
     <include refid="Base_Column_List" />
     from tb_user
     where account = #{account,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.softel.model.TbUser">
+    select
+    <include refid="Base_Column_List" />
+    from tb_user
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from tb_user

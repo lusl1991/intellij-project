@@ -13,15 +13,21 @@
            http://www.springframework.org/schema/tx
            http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
+    <aop:aspectj-autoproxy proxy-target-class="true" />
+
+    <context:annotation-config />
+
     <!-- jdbc配置 -->
     <context:property-placeholder location="classpath:config/jdbc.properties" />
 
     <!-- 自动将Service层注入-->
-    <context:component-scan base-package="com.softel.service" />
+    <context:component-scan base-package="com.softel.service">
+        <!--<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+        <context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice" />-->
+    </context:component-scan>
 
     <!-- dbcp数据源 -->
-    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init"
-          destroy-method="close">
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
 
         <property name="driverClassName" value="${jdbc.driver}" />
         <property name="url" value="${jdbc.url}" />
@@ -49,8 +55,8 @@
     <!-- mybatis的配置文件 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="configLocation" value="classpath:config/mybatis-config.xml"/>
         <property name="mapperLocations" value="classpath:com/softel/mapper/*Mapper.xml"/>
+        <property name="configLocation" value="classpath:config/mybatis-config.xml"/>
     </bean>
 
     <!-- spring与mybatis整合配置，扫描所有dao 和所有mapper文件 -->
@@ -97,9 +103,14 @@
         </tx:attributes>
     </tx:advice>
 
+    <bean id="exceptionAspect" class="com.softel.aspect.ServiceExceptionAspect"></bean>
     <aop:config>
         <aop:pointcut id="pc" expression="execution(public * com.softel.service.*.*(..))"/>
         <!--把事务控制在Service层-->
-        <aop:advisor advice-ref="txAdvice" pointcut-ref="pc"/>
+        <!--<aop:advisor advice-ref="txAdvice" pointcut-ref="pc"/>-->
+        <aop:aspect ref="exceptionAspect">
+            <aop:after-throwing method="afterThrowing" pointcut-ref="pc" throwing="e"/>
+        </aop:aspect>
     </aop:config>
+
 </beans>

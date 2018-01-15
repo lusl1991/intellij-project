@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.softel.dao.MerchantMapper" >
+  <resultMap id="BaseResultMap" type="com.softel.model.Merchant" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="address_detail" property="addressDetail" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="recommend_member_no" property="recommendMemberNo" jdbcType="INTEGER" />
+    <result column="recommend_nickname" property="recommendNickname" jdbcType="VARCHAR" />
+    <result column="recommend_phone" property="recommendPhone" jdbcType="VARCHAR" />
+    <result column="merchant_img" property="merchantImg" jdbcType="VARCHAR" />
+    <result column="merchant_QRCode" property="merchantQrcode" jdbcType="VARCHAR" />
+    <result column="merchant_name" property="merchantName" jdbcType="VARCHAR" />
+    <result column="merchant_desc" property="merchantDesc" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="discount" property="discount" jdbcType="INTEGER" />
+    <result column="provinceCode" property="provincecode" jdbcType="INTEGER" />
+    <result column="cityCode" property="citycode" jdbcType="INTEGER" />
+    <result column="areaCode" property="areacode" jdbcType="INTEGER" />
+    <result column="coordinate_x" property="coordinateX" jdbcType="REAL" />
+    <result column="coordinate_y" property="coordinateY" jdbcType="REAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, address_detail, create_date, nickname, recommend_member_no, recommend_nickname, 
+    recommend_phone, merchant_img, merchant_QRCode, merchant_name, merchant_desc, phone, 
+    discount, provinceCode, cityCode, areaCode, coordinate_x, coordinate_y
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from merchant
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.softel.model.Merchant">
+    select
+    <include refid="Base_Column_List" />
+    from merchant WHERE 1 = 1
+    <if test="id != null || id > 0">
+      AND  id = #{id,jdbcType=INTEGER}
+    </if>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from merchant
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.softel.model.Merchant" >
+    insert into merchant (id, address_detail, create_date, 
+      nickname, recommend_member_no, recommend_nickname, 
+      recommend_phone, merchant_img, merchant_QRCode, 
+      merchant_name, merchant_desc, phone, 
+      discount, provinceCode, cityCode, 
+      areaCode, coordinate_x, coordinate_y
+      )
+    values (#{id,jdbcType=INTEGER}, #{addressDetail,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{nickname,jdbcType=VARCHAR}, #{recommendMemberNo,jdbcType=INTEGER}, #{recommendNickname,jdbcType=VARCHAR}, 
+      #{recommendPhone,jdbcType=VARCHAR}, #{merchantImg,jdbcType=VARCHAR}, #{merchantQrcode,jdbcType=VARCHAR}, 
+      #{merchantName,jdbcType=VARCHAR}, #{merchantDesc,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{discount,jdbcType=INTEGER}, #{provincecode,jdbcType=INTEGER}, #{citycode,jdbcType=INTEGER}, 
+      #{areacode,jdbcType=INTEGER}, #{coordinateX,jdbcType=REAL}, #{coordinateY,jdbcType=REAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.softel.model.Merchant" >
+    insert into merchant
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="addressDetail != null" >
+        address_detail,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="nickname != null" >
+        nickname,
+      </if>
+      <if test="recommendMemberNo != null" >
+        recommend_member_no,
+      </if>
+      <if test="recommendNickname != null" >
+        recommend_nickname,
+      </if>
+      <if test="recommendPhone != null" >
+        recommend_phone,
+      </if>
+      <if test="merchantImg != null" >
+        merchant_img,
+      </if>
+      <if test="merchantQrcode != null" >
+        merchant_QRCode,
+      </if>
+      <if test="merchantName != null" >
+        merchant_name,
+      </if>
+      <if test="merchantDesc != null" >
+        merchant_desc,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="discount != null" >
+        discount,
+      </if>
+      <if test="provincecode != null" >
+        provinceCode,
+      </if>
+      <if test="citycode != null" >
+        cityCode,
+      </if>
+      <if test="areacode != null" >
+        areaCode,
+      </if>
+      <if test="coordinateX != null" >
+        coordinate_x,
+      </if>
+      <if test="coordinateY != null" >
+        coordinate_y,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="addressDetail != null" >
+        #{addressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="recommendMemberNo != null" >
+        #{recommendMemberNo,jdbcType=INTEGER},
+      </if>
+      <if test="recommendNickname != null" >
+        #{recommendNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="recommendPhone != null" >
+        #{recommendPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantImg != null" >
+        #{merchantImg,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantQrcode != null" >
+        #{merchantQrcode,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantName != null" >
+        #{merchantName,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantDesc != null" >
+        #{merchantDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="discount != null" >
+        #{discount,jdbcType=INTEGER},
+      </if>
+      <if test="provincecode != null" >
+        #{provincecode,jdbcType=INTEGER},
+      </if>
+      <if test="citycode != null" >
+        #{citycode,jdbcType=INTEGER},
+      </if>
+      <if test="areacode != null" >
+        #{areacode,jdbcType=INTEGER},
+      </if>
+      <if test="coordinateX != null" >
+        #{coordinateX,jdbcType=REAL},
+      </if>
+      <if test="coordinateY != null" >
+        #{coordinateY,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.softel.model.Merchant" >
+    update merchant
+    <set >
+      <if test="addressDetail != null" >
+        address_detail = #{addressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nickname != null" >
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="recommendMemberNo != null" >
+        recommend_member_no = #{recommendMemberNo,jdbcType=INTEGER},
+      </if>
+      <if test="recommendNickname != null" >
+        recommend_nickname = #{recommendNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="recommendPhone != null" >
+        recommend_phone = #{recommendPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantImg != null" >
+        merchant_img = #{merchantImg,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantQrcode != null" >
+        merchant_QRCode = #{merchantQrcode,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantName != null" >
+        merchant_name = #{merchantName,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantDesc != null" >
+        merchant_desc = #{merchantDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="discount != null" >
+        discount = #{discount,jdbcType=INTEGER},
+      </if>
+      <if test="provincecode != null" >
+        provinceCode = #{provincecode,jdbcType=INTEGER},
+      </if>
+      <if test="citycode != null" >
+        cityCode = #{citycode,jdbcType=INTEGER},
+      </if>
+      <if test="areacode != null" >
+        areaCode = #{areacode,jdbcType=INTEGER},
+      </if>
+      <if test="coordinateX != null" >
+        coordinate_x = #{coordinateX,jdbcType=REAL},
+      </if>
+      <if test="coordinateY != null" >
+        coordinate_y = #{coordinateY,jdbcType=REAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.softel.model.Merchant" >
+    update merchant
+    set address_detail = #{addressDetail,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      recommend_member_no = #{recommendMemberNo,jdbcType=INTEGER},
+      recommend_nickname = #{recommendNickname,jdbcType=VARCHAR},
+      recommend_phone = #{recommendPhone,jdbcType=VARCHAR},
+      merchant_img = #{merchantImg,jdbcType=VARCHAR},
+      merchant_QRCode = #{merchantQrcode,jdbcType=VARCHAR},
+      merchant_name = #{merchantName,jdbcType=VARCHAR},
+      merchant_desc = #{merchantDesc,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      discount = #{discount,jdbcType=INTEGER},
+      provinceCode = #{provincecode,jdbcType=INTEGER},
+      cityCode = #{citycode,jdbcType=INTEGER},
+      areaCode = #{areacode,jdbcType=INTEGER},
+      coordinate_x = #{coordinateX,jdbcType=REAL},
+      coordinate_y = #{coordinateY,jdbcType=REAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

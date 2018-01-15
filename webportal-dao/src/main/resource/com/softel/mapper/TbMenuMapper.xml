@@ -10,9 +10,10 @@
     <result column="ISLEAF" property="isleaf" jdbcType="INTEGER" />
     <result column="PARENTID" property="parentid" jdbcType="INTEGER" />
     <result column="ORDERID" property="orderid" jdbcType="INTEGER" />
+    <result column="ZT" property="zt" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, ICON, TITLE, PATH, LEVEL, ISLEAF, PARENTID, ORDERID
+    ID, ICON, TITLE, PATH, LEVEL, ISLEAF, PARENTID, ORDERID, ZT
   </sql>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -26,14 +27,14 @@
     select
     <include refid="Base_Column_List" />
     from tb_menu
-    where LEVEL = #{level,jdbcType=INTEGER} ORDER BY ORDERID
+    where ZT = 0 AND LEVEL = #{level,jdbcType=INTEGER} ORDER BY ORDERID
   </select>
   
   <select id="selectByParentId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
     select
     <include refid="Base_Column_List" />
     from tb_menu
-    where PARENTID = #{parentid,jdbcType=INTEGER}
+    where ZT = 0 AND PARENTID = #{parentid,jdbcType=INTEGER}
     ORDER BY ORDERID
   </select>
 

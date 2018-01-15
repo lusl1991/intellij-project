@@ -18,6 +18,8 @@ public class TbMenu {
 
     private Integer orderid;
 
+    private Integer zt;
+
     public Integer getId() {
         return id;
     }
@@ -80,5 +82,13 @@ public class TbMenu {
 
     public void setIsleaf(Integer isleaf) {
         this.isleaf = isleaf;
+    }
+
+    public Integer getZt() {
+        return zt;
+    }
+
+    public void setZt(Integer zt) {
+        this.zt = zt;
     }
 }

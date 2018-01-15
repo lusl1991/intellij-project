@@ -1,6 +1,9 @@
 package com.softel.model.utils;
 
+import java.beans.IntrospectionException;
+import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -170,5 +173,45 @@ public class ReflexObjectUtil {
         }
         System.out.println("多个（列表）对象的某个键的值列表====" + list.toString());
         return list;
+    }
+
+    /**
+     * 反射获取类属性及get方法
+     * @param clazz
+     * @return
+     * @throws IntrospectionException
+     */
+    @SuppressWarnings("rawtypes")
+    public static Map<String, String> getFiledAndGetMethod(Class clazz) throws IntrospectionException{
+        Field[] fields = clazz.getDeclaredFields();
+        Map<String, String> map = new HashMap<String, String>();
+        for (Field field : fields) {
+            String name = field.getName();
+            PropertyDescriptor pd=new PropertyDescriptor(name, clazz);
+            Method getMethod = pd.getReadMethod();
+            String method = getMethod.getName();
+            map.put(name, method);
+        }
+        return map;
+    }
+
+    /**
+     * 反射获取类属性及set方法
+     * @param clazz
+     * @return
+     * @throws IntrospectionException
+     */
+    @SuppressWarnings("rawtypes")
+    public static Map<String, String> getFiledAndSetMethod(Class clazz) throws IntrospectionException {
+        Field[] fields = clazz.getDeclaredFields();
+        Map<String, String> map = new HashMap<String, String>();
+        for (Field field : fields) {
+            String name = field.getName();
+            PropertyDescriptor pd=new PropertyDescriptor(name, clazz);
+            Method getMethod = pd.getWriteMethod();
+            String method = getMethod.getName();
+            map.put(name, method);
+        }
+        return map;
     }
 }

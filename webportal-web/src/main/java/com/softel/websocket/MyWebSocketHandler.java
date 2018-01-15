@@ -27,6 +27,7 @@ public class MyWebSocketHandler implements WebSocketHandler {
 	/**
 	 * 建立连接后
 	 */
+	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		Long qyid = (Long) session.getAttributes().get("qyid");
 		if (userSocketSessionMap.get(qyid) == null) {
@@ -36,14 +37,16 @@ public class MyWebSocketHandler implements WebSocketHandler {
 	/**
 	 * 消息处理，在客户端通过Websocket API发送的消息会经过这里，然后进行相应的处理
 	 */
-	public void handleMessage(WebSocketSession session,WebSocketMessage<?> message) throws Exception {
+	@Override
+	public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
 		System.out.println(message.getPayload());
 	}
 	
 	/**
 	 * 消息传输错误处理
 	 */
-	public void handleTransportError(WebSocketSession session,Throwable exception) throws Exception {
+	@Override
+	public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
 		if (session.isOpen()) {
 			session.close();
 		}
@@ -62,7 +65,8 @@ public class MyWebSocketHandler implements WebSocketHandler {
 	/**
 	 * 关闭连接后
 	 */
-	public void afterConnectionClosed(WebSocketSession session,CloseStatus closeStatus) throws Exception {
+	@Override
+	public void afterConnectionClosed(WebSocketSession session, CloseStatus closeStatus) throws Exception {
 		System.out.println("Websocket:" + session.getId() + "已经关闭");
 		Iterator<Entry<Long, WebSocketSession>> it = userSocketSessionMap.entrySet().iterator();
 		// 移除Socket会话
@@ -95,7 +99,7 @@ public class MyWebSocketHandler implements WebSocketHandler {
 		for(long i=0;i<500;i++){
 			if (session != null && session.isOpen()) {
 				msg.setSuccess(i+1);
-				msg.setTotal(500l);
+				msg.setTotal(500L);
 				TextMessage message = new TextMessage(new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create().toJson(msg));
 				if(i==450){
 					break;
@@ -103,7 +107,7 @@ public class MyWebSocketHandler implements WebSocketHandler {
 					session.sendMessage(message);
 				}
 				try {
-					thread.sleep(50);
+					Thread.sleep(50);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}

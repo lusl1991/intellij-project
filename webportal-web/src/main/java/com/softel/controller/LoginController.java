@@ -1,11 +1,9 @@
 package com.softel.controller;
 
 import com.softel.annotation.CaptchaAnnotation;
+import com.softel.exception.BusinessException;
 import com.softel.model.TbUser;
-import com.softel.model.utils.CookiesUtil;
-import com.softel.model.utils.ResultVo;
-import com.softel.model.utils.SessionUtils;
-import com.softel.model.utils.TokenProcessor;
+import com.softel.model.utils.*;
 import com.softel.service.MenuService;
 import com.softel.service.UserService;
 import com.softel.vo.Menu;
@@ -28,9 +26,9 @@ public class LoginController {
     private MenuService menuService;
 
     @RequestMapping("/login")
-    @CaptchaAnnotation(checkCaptcha = false)
+    @CaptchaAnnotation(checkCaptcha = true)
     @ResponseBody
-    public ResultVo UserLogin(@RequestBody TbUser tbUser, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public ResultVo UserLogin(/*@RequestBody*/ TbUser tbUser, HttpServletRequest request, HttpServletResponse response) throws IOException {
         ResultVo resultVo = userService.userLogin(tbUser);
         if(resultVo.isSuccess()){
             this.CreateToken(request, response);
@@ -44,7 +42,7 @@ public class LoginController {
         SessionUtils.setSessionValue("token", token, request);
     }
 
-    @RequestMapping("/selectMenu")
+    @RequestMapping(method={RequestMethod.GET,RequestMethod.POST},value="/selectMenu")
     @ResponseBody
     public List<Menu> selectMenu(HttpServletRequest request, HttpServletResponse response){
        return menuService.selectByLevel();

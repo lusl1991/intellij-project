@@ -13,8 +13,9 @@ import org.springframework.web.socket.server.HandshakeInterceptor;
  * 
  */
 public class HandShake implements HandshakeInterceptor {
-	public boolean beforeHandshake(ServerHttpRequest request,ServerHttpResponse response, WebSocketHandler wsHandler,
-		Map<String, Object> attributes) throws Exception {
+	@Override
+	public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler,
+								   Map<String, Object> attributes) throws Exception {
 		System.out.println("Websocket:用户[ID:"+ ((ServletServerHttpRequest) request).getServletRequest().getSession(false).getAttribute("qyid") + "]已经建立连接");
 		if (request instanceof ServletServerHttpRequest) {
 			ServletServerHttpRequest servletRequest = (ServletServerHttpRequest) request;
@@ -31,7 +32,8 @@ public class HandShake implements HandshakeInterceptor {
 		return true;
 	}
 	
-	public void afterHandshake(ServerHttpRequest request,ServerHttpResponse response, WebSocketHandler wsHandler,
-			Exception exception) {
+	@Override
+	public void afterHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler,
+							   Exception exception) {
 	}
 }

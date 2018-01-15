@@ -15,7 +15,8 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 public class WebSocketConfig extends WebMvcConfigurerAdapter implements WebSocketConfigurer {
 	@Resource
 	MyWebSocketHandler handler;
-	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+	@Override
+    public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
 		registry.addHandler(handler, "/ws").addInterceptors(new HandShake());
 		registry.addHandler(handler, "/ws/sockjs").addInterceptors(new HandShake()).withSockJS();
 	}

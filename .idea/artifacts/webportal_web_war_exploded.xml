@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="webportal-web:war exploded">
+  <artifact type="exploded-war" build-on-make="true" name="webportal-web:war exploded">
     <output-path>$PROJECT_DIR$/webportal-web/target/webportal-web</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
@@ -16,28 +16,28 @@
           <element id="archive" name="webportal-service-1.0-SNAPSHOT.jar">
             <element id="module-output" name="webportal-service" />
           </element>
-          <element id="library" level="project" name="Maven: org.springframework:spring-core:4.0.6.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:4.0.6.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-expression:4.0.6.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-web:4.0.6.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-beans:4.0.6.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-context:4.0.6.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-aop:4.0.6.RELEASE" />
-          <element id="library" level="project" name="Maven: aopalliance:aopalliance:1.0" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-tx:4.0.6.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-orm:4.0.6.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:4.0.6.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-test:4.0.6.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-websocket:4.0.6.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-core:4.3.3.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:4.3.3.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-expression:4.3.3.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-web:4.3.3.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-beans:4.3.3.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-context:4.3.3.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-aop:4.3.3.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-tx:4.3.3.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-orm:4.3.3.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:4.3.3.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-test:4.3.3.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-websocket:4.3.3.RELEASE" />
           <element id="library" level="project" name="Maven: org.mybatis:mybatis:3.2.7" />
           <element id="library" level="project" name="Maven: org.mybatis:mybatis-spring:1.2.2" />
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.30" />
           <element id="library" level="project" name="Maven: com.alibaba:druid:1.0.5" />
           <element id="library" level="project" name="Maven: org.codehaus.jackson:jackson-mapper-asl:1.9.13" />
           <element id="library" level="project" name="Maven: org.codehaus.jackson:jackson-core-asl:1.9.13" />
-          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.1.0" />
-          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.1.0" />
-          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.1.0" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.5.0" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.5.0" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.5.0" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.jr:jackson-jr-all:2.5.0" />
           <element id="library" level="project" name="Maven: log4j:log4j:1.2.12" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.6.6" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-log4j12:1.6.6" />
@@ -69,7 +69,10 @@
           <element id="library" level="project" name="Maven: commons-beanutils:commons-beanutils:1.8.0" />
           <element id="library" level="project" name="Maven: commons-lang:commons-lang:2.5" />
           <element id="library" level="project" name="Maven: net.sf.ezmorph:ezmorph:1.0.6" />
+          <element id="library" level="project" name="Maven: eu.bitwalker:UserAgentUtils:1.20" />
           <element id="library" level="project" name="Maven: com.google.code.kaptcha:kaptcha:2.3.2" />
+          <element id="library" level="project" name="Maven: com.github.pagehelper:pagehelper:5.1.2" />
+          <element id="library" level="project" name="Maven: com.github.jsqlparser:jsqlparser:1.0" />
         </element>
       </element>
       <element id="directory" name="META-INF">
