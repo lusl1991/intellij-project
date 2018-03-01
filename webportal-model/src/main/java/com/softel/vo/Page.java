@@ -1,5 +1,7 @@
 package com.softel.vo;
 
+import lombok.Data;
+
 /**
  * @version 1.0
  * @author: lsl
@@ -7,24 +9,8 @@ package com.softel.vo;
  * @date: Created in 10:21 2017/11/22
  * @modified By:
  */
+@Data
 public class Page {
     private int pageNum;
-
     private int pageSize;
-
-    public int getPageNum() {
-        return pageNum;
-    }
-
-    public void setPageNum(int pageNum) {
-        this.pageNum = pageNum;
-    }
-
-    public int getPageSize() {
-        return pageSize;
-    }
-
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
-    }
 }

@@ -13,8 +13,6 @@
            http://www.springframework.org/schema/tx
            http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
-    <aop:aspectj-autoproxy proxy-target-class="true" />
-
     <context:annotation-config />
 
     <!-- jdbc配置 -->
@@ -86,31 +84,5 @@
           class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
-    <tx:advice id="txAdvice" transaction-manager="transactionManager">
-        <tx:attributes>
-            <!-- 写操作 -->
-            <tx:method name="insert*" propagation="REQUIRED" isolation="DEFAULT"/>
-            <tx:method name="update*" propagation="REQUIRED" isolation="DEFAULT"/>
-            <tx:method name="delete*" propagation="REQUIRED" isolation="DEFAULT"/>
-            <tx:method name="batch*" propagation="REQUIRED" isolation="DEFAULT"/>
-
-            <!-- 读操作 -->
-            <tx:method name="load*" propagation="REQUIRED" isolation="DEFAULT" read-only="true"/>
-            <tx:method name="get*" propagation="REQUIRED" isolation="DEFAULT" read-only="true"/>
-            <tx:method name="find*" propagation="REQUIRED" isolation="DEFAULT" read-only="true"/>
-
-            <tx:method name="*" propagation="REQUIRED" isolation="DEFAULT"/>
-        </tx:attributes>
-    </tx:advice>
-
-    <bean id="exceptionAspect" class="com.softel.aspect.ServiceExceptionAspect"></bean>
-    <aop:config>
-        <aop:pointcut id="pc" expression="execution(public * com.softel.service.*.*(..))"/>
-        <!--把事务控制在Service层-->
-        <!--<aop:advisor advice-ref="txAdvice" pointcut-ref="pc"/>-->
-        <aop:aspect ref="exceptionAspect">
-            <aop:after-throwing method="afterThrowing" pointcut-ref="pc" throwing="e"/>
-        </aop:aspect>
-    </aop:config>
 
 </beans>
